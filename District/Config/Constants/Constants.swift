@@ -11,4 +11,8 @@ enum Constants {
     static let venuesCollectionPath: String = "venues"
     static let gamesCollectionPath: String = "games"
     static let bookingsCollectionPath: String = "bookings"
+    static let participantsSubcollection: String = "participants"
+    static let messagesSubcollection: String = "messages"
+    static let platformFee: Double = 49
+    static let inviteCodeLength: Int = 6
 }

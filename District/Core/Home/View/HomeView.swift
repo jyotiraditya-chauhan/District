@@ -11,6 +11,7 @@ struct HomeView: View {
     @Environment(AuthViewModel.self) var authViewModel // Required for signout
     @Environment(AppRouter.self) private var router
     @State private var viewModel = HomeViewModel()
+    @State private var showJoinCodeSheet = false
     
     var body: some View {
         ZStack {
@@ -18,8 +19,6 @@ struct HomeView: View {
 
             ScrollView(showsIndicators: false) {
                 VStack(spacing: DS.s5) {
-                    Color.clear.frame(height: DS.s1) // Spacing for top
-
                     customHeader
 
                     BannerCarousel(banners: viewModel.banners)
@@ -35,6 +34,7 @@ struct HomeView: View {
             }
         }
         .toolbar(.hidden, for: .navigationBar)
+        .sheet(isPresented: $showJoinCodeSheet) { JoinByCodeSheet() }
     }
 
     // MARK: Custom Header
@@ -67,7 +67,16 @@ struct HomeView: View {
 
                 // Right Side: Action Icons
                 HStack(spacing: DS.s2) {
-                    Button(action: {}) {
+                    Button(action: { showJoinCodeSheet = true }) {
+                        Image(systemName: "number.square.fill")
+                            .font(.system(size: 16, weight: .medium))
+                            .foregroundStyle(DS.textPrimary)
+                            .frame(width: 44, height: 44)
+                            .background(Color(white: 0.15))
+                            .clipShape(Circle())
+                    }
+
+                    Button(action: { router.push(.myMatches) }) {
                         Image(systemName: "bookmark")
                             .font(.system(size: 16, weight: .medium))
                             .foregroundStyle(DS.textPrimary)
@@ -77,7 +86,7 @@ struct HomeView: View {
                     }
 
                     Button(action: {
-                        authViewModel.signOut()
+                        router.push(.profile)
                     }) {
                         Image(systemName: "person.fill")
                             .font(.system(size: 20))
@@ -101,7 +110,6 @@ struct HomeView: View {
             }
             .buttonStyle(PlainButtonStyle())
         }
-        .padding(.top, DS.s2)
     }
 
     // MARK: Pick a sport

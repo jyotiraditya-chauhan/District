@@ -1,13 +1,32 @@
 import SwiftUI
+import FirebaseFirestore
 
 struct VenueDetailView: View {
     @Environment(AppRouter.self) private var router
     @Environment(\.presentationMode) var presentationMode
-    
+    @Environment(BookingService.self) private var bookingService
+    @Environment(AuthViewModel.self) private var authViewModel
+
     let venue: BoxVenue
-    
+
     // For scroll tracking
     @State private var scrollOffset: CGFloat = 0
+
+    @State private var publicLobbies: [BookingEntity] = []
+    @State private var lobbiesListener: ListenerRegistration?
+    @State private var showJoinCodeSheet = false
+
+    /// Hide lobbies whose payment window has already lapsed, and ones the
+    /// current user already hosts or has joined — nothing left to do there.
+    private var joinablePublicLobbies: [BookingEntity] {
+        let uid = authViewModel.currentUser?.uid
+        return publicLobbies.filter { lobby in
+            guard lobby.paymentDeadline > Date() else { return false }
+            guard lobby.hostId != uid else { return false }
+            if let uid, lobby.participantIds.contains(uid) { return false }
+            return true
+        }
+    }
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -148,6 +167,60 @@ struct VenueDetailView: View {
                             }
                         }
                         
+                        // Public Lobbies
+                        if !joinablePublicLobbies.isEmpty {
+                            VStack(alignment: .leading, spacing: DS.s2) {
+                                Text("PUBLIC MATCHES")
+                                    .font(.caption)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(DS.textSecondary)
+                                    .padding(.horizontal, DS.s3)
+
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack(spacing: DS.s2) {
+                                        ForEach(joinablePublicLobbies) { lobby in
+                                            PublicLobbyCard(booking: lobby) {
+                                                router.push(.joinConfirm(bookingId: lobby.id ?? ""))
+                                            }
+                                        }
+                                    }
+                                    .padding(.horizontal, DS.s3)
+                                }
+                            }
+                        }
+
+                        // Join a private match with a code
+                        VStack(alignment: .leading, spacing: DS.s2) {
+                            Button(action: { showJoinCodeSheet = true }) {
+                                HStack(spacing: DS.s2) {
+                                    Image(systemName: "ticket")
+                                        .font(.title3)
+                                        .foregroundColor(.white)
+                                        .padding(8)
+                                        .background(Color.white.opacity(0.1))
+                                        .cornerRadius(8)
+
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text("Have an invite code?")
+                                            .font(.subheadline)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.white)
+                                        Text("Join a private match at this venue")
+                                            .font(.caption)
+                                            .foregroundColor(DS.textSecondary)
+                                    }
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .font(.caption)
+                                        .foregroundColor(DS.textSecondary)
+                                }
+                                .padding(16)
+                                .background(DS.surface)
+                                .cornerRadius(16)
+                            }
+                        }
+                        .padding(.horizontal, DS.s3)
+                        
                         // Offers
                         VStack(alignment: .leading, spacing: DS.s2) {
                             Text("1 OFFER AVAILABLE")
@@ -268,15 +341,6 @@ struct VenueDetailView: View {
             
             // Floating Liquid Glass Action Bar
             HStack {
-                Text("Box Cricket")
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.white)
-                
-                Image(systemName: "chevron.right")
-                    .font(.caption)
-                    .foregroundColor(DS.textSecondary)
-                
                 Spacer()
                 
                 Button(action: { router.push(.bookSlot(venue: venue)) }) {
@@ -348,6 +412,17 @@ struct VenueDetailView: View {
                     }
                 }
             }
+        }
+        .onAppear {
+            lobbiesListener = bookingService.observePublicLobbies(venueId: venue.venueId) { lobbies in
+                self.publicLobbies = lobbies
+            }
+        }
+        .onDisappear {
+            lobbiesListener?.remove()
+        }
+        .sheet(isPresented: $showJoinCodeSheet) {
+            JoinByCodeSheet()
         }
     }
     

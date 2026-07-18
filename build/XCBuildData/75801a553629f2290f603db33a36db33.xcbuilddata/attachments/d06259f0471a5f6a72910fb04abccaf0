@@ -1,0 +1,4 @@
+module FirebaseFirestoreInternalWrapper {
+umbrella "/Users/adityachauhan/Library/Developer/Xcode/DerivedData/District-eghkvbksxbrfjbfyiqejvsxuuoxs/SourcePackages/checkouts/firebase-ios-sdk/FirebaseFirestoreInternal"
+export *
+}

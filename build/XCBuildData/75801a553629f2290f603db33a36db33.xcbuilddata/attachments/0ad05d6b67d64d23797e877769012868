@@ -1,0 +1,79 @@
+{
+  "" : {
+    "diagnostics" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/DistrictWidgetExtension-primary.dia",
+    "emit-module-dependencies" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/DistrictWidgetExtension-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/DistrictWidgetExtension-primary-emit-module.dia",
+    "pch" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/DistrictWidgetExtension-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/DistrictWidgetExtension-primary.swiftdeps"
+  },
+  "/Users/adityachauhan/Downloads/XCode/District/DistrictWidget/DistrictWidget.swift" : {
+    "const-values" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/DistrictWidget.swiftconstvalues",
+    "dependencies" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/DistrictWidget.d",
+    "diagnostics" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/DistrictWidget.dia",
+    "index-unit-output-path" : "/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/DistrictWidget.o",
+    "llvm-bc" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/DistrictWidget.bc",
+    "object" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/DistrictWidget.o",
+    "swift-dependencies" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/DistrictWidget.swiftdeps",
+    "swiftmodule" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/DistrictWidget~partial.swiftmodule"
+  },
+  "/Users/adityachauhan/Downloads/XCode/District/DistrictWidget/DistrictWidgetBundle.swift" : {
+    "const-values" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/DistrictWidgetBundle.swiftconstvalues",
+    "dependencies" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/DistrictWidgetBundle.d",
+    "diagnostics" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/DistrictWidgetBundle.dia",
+    "index-unit-output-path" : "/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/DistrictWidgetBundle.o",
+    "llvm-bc" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/DistrictWidgetBundle.bc",
+    "object" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/DistrictWidgetBundle.o",
+    "swift-dependencies" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/DistrictWidgetBundle.swiftdeps",
+    "swiftmodule" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/DistrictWidgetBundle~partial.swiftmodule"
+  },
+  "/Users/adityachauhan/Downloads/XCode/District/DistrictWidget/SportLobbyEntryView.swift" : {
+    "const-values" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyEntryView.swiftconstvalues",
+    "dependencies" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyEntryView.d",
+    "diagnostics" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyEntryView.dia",
+    "index-unit-output-path" : "/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyEntryView.o",
+    "llvm-bc" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyEntryView.bc",
+    "object" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyEntryView.o",
+    "swift-dependencies" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyEntryView.swiftdeps",
+    "swiftmodule" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyEntryView~partial.swiftmodule"
+  },
+  "/Users/adityachauhan/Downloads/XCode/District/DistrictWidget/SportLobbyProvider.swift" : {
+    "const-values" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyProvider.swiftconstvalues",
+    "dependencies" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyProvider.d",
+    "diagnostics" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyProvider.dia",
+    "index-unit-output-path" : "/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyProvider.o",
+    "llvm-bc" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyProvider.bc",
+    "object" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyProvider.o",
+    "swift-dependencies" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyProvider.swiftdeps",
+    "swiftmodule" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyProvider~partial.swiftmodule"
+  },
+  "/Users/adityachauhan/Downloads/XCode/District/DistrictWidget/SportLobbyWidget.swift" : {
+    "const-values" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyWidget.swiftconstvalues",
+    "dependencies" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyWidget.d",
+    "diagnostics" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyWidget.dia",
+    "index-unit-output-path" : "/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyWidget.o",
+    "llvm-bc" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyWidget.bc",
+    "object" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyWidget.o",
+    "swift-dependencies" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyWidget.swiftdeps",
+    "swiftmodule" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportLobbyWidget~partial.swiftmodule"
+  },
+  "/Users/adityachauhan/Downloads/XCode/District/DistrictWidget/SportSelectionIntent.swift" : {
+    "const-values" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportSelectionIntent.swiftconstvalues",
+    "dependencies" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportSelectionIntent.d",
+    "diagnostics" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportSelectionIntent.dia",
+    "index-unit-output-path" : "/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportSelectionIntent.o",
+    "llvm-bc" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportSelectionIntent.bc",
+    "object" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportSelectionIntent.o",
+    "swift-dependencies" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportSelectionIntent.swiftdeps",
+    "swiftmodule" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/SportSelectionIntent~partial.swiftmodule"
+  },
+  "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/adityachauhan/Downloads/XCode/District/build/District.build/Debug-iphoneos/DistrictWidgetExtension.build/Objects-normal/arm64/GeneratedAssetSymbols~partial.swiftmodule"
+  }
+}

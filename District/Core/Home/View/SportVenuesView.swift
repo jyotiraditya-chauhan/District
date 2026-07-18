@@ -24,6 +24,8 @@ import Foundation
 
 struct BoxVenue: Identifiable, Hashable, Equatable {
     let id = UUID()
+    let venueId: String
+    let gameId: String
     let name: String
     let rating: Double
     let distance: String
@@ -50,6 +52,8 @@ struct SearchPlayCategory: Identifiable {
 extension BoxVenue {
     static let mocks = [
         BoxVenue(
+            venueId: "mock_venue_1",
+            gameId: "mock_game_1",
             name: "Elite Cricket",
             rating: 5.0,
             distance: "5 km",
@@ -66,6 +70,8 @@ extension BoxVenue {
             imageNames: ["Box Cricket"]
         ),
         BoxVenue(
+            venueId: "mock_venue_2",
+            gameId: "mock_game_2",
             name: "ClayGrounds x District Play | Chattarpur",
             rating: 3.3,
             distance: "1.3 km",
@@ -374,6 +380,8 @@ struct SportVenuesView: View {
             }.prefix(4)
             
             return BoxVenue(
+                venueId: entity.id ?? "",
+                gameId: sportsGames.first?.id ?? "",
                 name: entity.name,
                 rating: entity.rating,
                 distance: DataManager.shared.distanceString(forVenue: entity),

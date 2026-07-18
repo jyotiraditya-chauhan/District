@@ -5,6 +5,8 @@ import SwiftUI
 struct ReviewBookingView: View {
     @Environment(AppRouter.self) private var router
     @Environment(\.presentationMode) var presentationMode
+    @Environment(BookingService.self) private var bookingService
+    @Environment(AuthViewModel.self) private var authViewModel
 
     let venue: BoxVenue
     let date: String
@@ -15,14 +17,14 @@ struct ReviewBookingView: View {
     let totalCost: Double
     let skillLevel: String
     let paymentWindow: Int
+    let sport: String
+    let slotStartDate: Date
 
-    @State private var couponCode = ""
-    @State private var couponApplied = false
-    @State private var selectedPayment = "UPI"
+    @State private var isCreating = false
+    @State private var errorMessage: String?
 
     var platformFee: Double { 49 }
-    var discount: Double { couponApplied ? 100 : 0 }
-    var grandTotal: Double { totalCost + platformFee - discount }
+    var grandTotal: Double { totalCost + platformFee }
     var perPlayer: Double { totalCost / Double(totalPlayers) }
     var estimatedRecovery: Double { perPlayer * Double(totalPlayers - 1) }
     var organizerNetCost: Double { grandTotal - estimatedRecovery }
@@ -34,14 +36,14 @@ struct ReviewBookingView: View {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 0) {
 
-
-
                     // ── Booking Card ─────────────────────────────────────
                     VStack(alignment: .leading, spacing: 0) {
                         HStack(spacing: 14) {
-                            Image("cricket1")
-                                .resizable().scaledToFill()
-                                .frame(width: 72, height: 64).cornerRadius(10).clipped()
+                            if let img = venue.imageNames.first {
+                                Image(img)
+                                    .resizable().scaledToFill()
+                                    .frame(width: 72, height: 64).cornerRadius(10).clipped()
+                            }
 
                             VStack(alignment: .leading, spacing: 6) {
                                 Text(venue.name)
@@ -80,10 +82,6 @@ struct ReviewBookingView: View {
                         priceRow("Turf Booking (\(String(format: "%.1f", duration)) hr)", "₹\(String(format: "%.0f", totalCost))", color: .white)
                         priceRow("Platform Fee", "₹\(String(format: "%.0f", platformFee))", color: .white)
 
-                        if couponApplied {
-                            priceRow("Coupon (PLAY100)", "- ₹100", color: Color(red: 100/255, green: 220/255, blue: 120/255))
-                        }
-
                         Divider().background(DS.textSecondary.opacity(0.3))
 
                         priceRow("Total Payable Now", "₹\(String(format: "%.0f", grandTotal))", color: .white, font: .headline)
@@ -107,67 +105,12 @@ struct ReviewBookingView: View {
                     .cornerRadius(16)
                     .padding(.horizontal, DS.s3)
 
-                    // ── Coupon ────────────────────────────────────────────
-                    sectionHeader("COUPON CODE")
-
-                    HStack {
-                        Image(systemName: "ticket").foregroundColor(DS.textSecondary)
-                        TextField("Enter coupon", text: $couponCode)
-                            .foregroundColor(.white)
-                            .font(.subheadline)
-                        Spacer()
-                        Button {
-                            if couponCode.uppercased() == "PLAY100" { couponApplied = true }
-                        } label: {
-                            Text("Apply")
-                                .font(.caption).fontWeight(.bold).foregroundColor(.black)
-                                .padding(.horizontal, 14).padding(.vertical, 7)
-                                .background(Color.white).cornerRadius(10)
-                        }
+                    if let errorMessage {
+                        Text(errorMessage)
+                            .font(.caption).foregroundColor(.red)
+                            .padding(.horizontal, DS.s3)
+                            .padding(.top, 12)
                     }
-                    .padding(16)
-                    .background(DS.surface)
-                    .cornerRadius(16)
-                    .padding(.horizontal, DS.s3)
-
-                    // ── Payment Method ────────────────────────────────────
-                    sectionHeader("PAY VIA")
-
-                    HStack(spacing: 10) {
-                        ForEach(["UPI", "Card", "Wallet"], id: \.self) { method in
-                            Button { selectedPayment = method } label: {
-                                HStack(spacing: 6) {
-                                    Image(systemName: paymentIcon(method))
-                                        .font(.caption)
-                                    Text(method).font(.caption).fontWeight(.bold)
-                                }
-                                .foregroundColor(selectedPayment == method ? .black : .white)
-                                .padding(.horizontal, 16).padding(.vertical, 10)
-                                .background(selectedPayment == method ? Color.white : DS.surface)
-                                .cornerRadius(12)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .stroke(selectedPayment == method ? Color.clear : DS.textSecondary.opacity(0.3), lineWidth: 1)
-                                )
-                            }
-                        }
-                        Spacer()
-                    }
-                    .padding(.horizontal, DS.s3)
-
-                    // ── Cancellation Policy ───────────────────────────────
-                    sectionHeader("CANCELLATION POLICY")
-
-                    VStack(alignment: .leading, spacing: 12) {
-                        cancellationRow(icon: "clock.badge.checkmark", label: "> 24 hrs", detail: "Full refund to wallet")
-                        cancellationRow(icon: "clock.badge.exclamationmark", label: "4–24 hrs", detail: "50% refund + slot reopened")
-                        cancellationRow(icon: "xmark.circle", label: "< 4 hrs", detail: "No refund — slot stays open")
-                        cancellationRow(icon: "cloud.rain", label: "Venue / Rain", detail: "100% refund guaranteed")
-                    }
-                    .padding(16)
-                    .background(DS.surface)
-                    .cornerRadius(16)
-                    .padding(.horizontal, DS.s3)
 
                     // ── Disclaimer ────────────────────────────────────────
                     Text("Payment Window: Players have \(paymentWindow) hr\(paymentWindow > 1 ? "s" : "") to pay after invite. Unpaid slots auto-open to public to protect your investment.")
@@ -185,32 +128,28 @@ struct ReviewBookingView: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("₹\(String(format: "%.0f", grandTotal))")
                         .font(.title3).fontWeight(.bold).foregroundColor(.white)
-                    Text("Pay via \(selectedPayment)")
+                    Text("Total Booking Cost")
                         .font(.caption).foregroundColor(DS.textSecondary)
                 }
 
                 Spacer()
 
                 Button(action: {
-                    router.push(.matchRoom(
-                        venue: venue,
-                        date: date,
-                        time: time,
-                        matchType: matchType,
-                        totalPlayers: totalPlayers,
-                        perPlayerCost: perPlayer,
-                        totalCost: totalCost,
-                        skillLevel: skillLevel
-                    ))
+                    Task { await createMatch() }
                 }) {
                     HStack(spacing: 6) {
-                        Image(systemName: "lock.fill").font(.caption)
-                        Text("Pay & Book")
+                        if isCreating {
+                            ProgressView().tint(.black)
+                        } else {
+                            Image(systemName: "play.fill").font(.caption)
+                            Text("Create Match")
+                        }
                     }
                     .font(.subheadline).fontWeight(.bold).foregroundColor(.black)
                     .padding(.horizontal, 24).padding(.vertical, 14)
                     .background(Color.white).cornerRadius(24)
                 }
+                .disabled(isCreating)
             }
             .padding(.horizontal, 20).padding(.vertical, 14)
             .background(.ultraThinMaterial)
@@ -235,8 +174,6 @@ struct ReviewBookingView: View {
     }
 
     // MARK: Sub-views
-
-
 
     private func sectionHeader(_ text: String) -> some View {
         Text(text)
@@ -264,20 +201,40 @@ struct ReviewBookingView: View {
         }
     }
 
-    private func cancellationRow(icon: String, label: String, detail: String) -> some View {
-        HStack(spacing: 12) {
-            Image(systemName: icon).foregroundColor(DS.textSecondary).frame(width: 20)
-            Text(label).font(.caption).fontWeight(.bold).foregroundColor(.white).frame(width: 70, alignment: .leading)
-            Text(detail).font(.caption).foregroundColor(DS.textSecondary)
+    private func createMatch() async {
+        guard let user = authViewModel.currentUser else {
+            errorMessage = "Please sign in to create a match."
+            return
         }
-    }
 
-    private func paymentIcon(_ method: String) -> String {
-        switch method {
-        case "UPI": return "indianrupeesign.circle.fill"
-        case "Card": return "creditcard.fill"
-        case "Wallet": return "wallet.pass.fill"
-        default: return "creditcard"
+        isCreating = true
+        errorMessage = nil
+
+        do {
+            let bookingId = try await bookingService.createBooking(
+                venue: venue,
+                sport: sport,
+                host: user,
+                slotDateLabel: date,
+                slotTimeLabel: time,
+                startDate: slotStartDate,
+                durationHours: duration,
+                isPublic: matchType == "Public",
+                title: nil,
+                matchType: matchType,
+                skillLevel: skillLevel,
+                ageGroup: nil,
+                rules: nil,
+                totalSpots: totalPlayers,
+                totalCost: totalCost,
+                perPlayerCost: perPlayer,
+                paymentWindowHours: paymentWindow
+            )
+            isCreating = false
+            router.push(.matchRoom(bookingId: bookingId))
+        } catch {
+            isCreating = false
+            errorMessage = error.localizedDescription
         }
     }
 }

@@ -308,7 +308,12 @@ struct BookSlotView: View {
                             time: slot.time,
                             duration: durationHours,
                             turfName: "Turf 1",
-                            totalCost: 2000 * durationHours
+                            totalCost: 2000 * durationHours,
+                            slotStartDate: SlotTime.startDate(
+                                day: selectedDate,
+                                timeRange: slot.time,
+                                isPM: selectedTimeOfDay == "Evening"
+                            )
                         ))
                     }) {
                         Text("Proceed")

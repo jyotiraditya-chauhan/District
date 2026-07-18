@@ -13,6 +13,7 @@ import GoogleSignIn
 struct DistrictApp: App {
     @State private var showSplash = true
     @State private var authViewModel = AuthViewModel()
+    @State private var pendingDeepLink: URL?
 
     init() {
         FirebaseApp.configure()
@@ -26,11 +27,15 @@ struct DistrictApp: App {
                         showSplash = false
                     }
                 } else {
-                    RootNavigationView(authViewModel: authViewModel)
+                    RootNavigationView(authViewModel: authViewModel, initialDeepLink: pendingDeepLink)
                 }
             }
             .onOpenURL { url in
-                GIDSignIn.sharedInstance.handle(url)
+                if url.scheme == WidgetDeepLink.scheme {
+                    pendingDeepLink = url
+                } else {
+                    GIDSignIn.sharedInstance.handle(url)
+                }
             }
         }
     }

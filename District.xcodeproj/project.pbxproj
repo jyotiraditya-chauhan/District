@@ -9,16 +9,51 @@
 /* Begin PBXBuildFile section */
 		16B5C4CCA4CE5765415E22DC /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F92C35D56CFAF2FAB17E79C4 /* FirebaseAuth */; };
 		AE6E7D8A93D538A608358CBE /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4EF41549CB7DD53F8C142BE2 /* GoogleSignInSwift */; };
+		BE62255C300C3D5B009C3305 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE62255B300C3D5B009C3305 /* WidgetKit.framework */; };
+		BE62255E300C3D5B009C3305 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE62255D300C3D5B009C3305 /* SwiftUI.framework */; };
+		BE622569300C3D5F009C3305 /* DistrictWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BE622559300C3D5B009C3305 /* DistrictWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D0BC79704C59A43F28870FA0 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = D58A94C2FBD8410E49359D95 /* FirebaseCore */; };
 		D4D41AB0D4591AD62D5F8547 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 91CC6C7207EA0C1490E55F70 /* FirebaseFirestore */; };
 		DA6E82293CB978390A06F0BE /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 737479CA262AD434F8789109 /* GoogleSignIn */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		BE622567300C3D5F009C3305 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BE62236C300BFB4D009C3305 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE622558300C3D5B009C3305;
+			remoteInfo = DistrictWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BE62256E300C3D5F009C3305 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			dstPath = "";
+			dstSubfolder = PlugIns;
+			files = (
+
+			);
+			name = "Embed Foundation Extensions";
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		BE622374300BFB4D009C3305 /* District.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = District.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE622559300C3D5B009C3305 /* DistrictWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DistrictWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE62255B300C3D5B009C3305 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = /System/Library/Frameworks/WidgetKit.framework; sourceTree = "<absolute>"; };
+		BE62255D300C3D5B009C3305 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = /System/Library/Frameworks/SwiftUI.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		BE62256D300C3D5F009C3305 /* Exceptions for "DistrictWidget" folder in "DistrictWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = BE622558300C3D5B009C3305 /* DistrictWidgetExtension */;
+		};
 		CDF30FCC9A91D9B4382DB283 /* Exceptions for "District" folder in "District" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -37,6 +72,14 @@
 			path = District;
 			sourceTree = "<group>";
 		};
+		BE62255F300C3D5B009C3305 /* DistrictWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BE62256D300C3D5F009C3305 /* Exceptions for "DistrictWidget" folder in "DistrictWidgetExtension" target */,
+			);
+			path = DistrictWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +93,13 @@
 				AE6E7D8A93D538A608358CBE /* GoogleSignInSwift in Frameworks */,
 			);
 		};
+		BE622556300C3D5B009C3305 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+				BE62255E300C3D5B009C3305 /* SwiftUI.framework in Frameworks */,
+				BE62255C300C3D5B009C3305 /* WidgetKit.framework in Frameworks */,
+			);
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -57,6 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				BE622376300BFB4D009C3305 /* District */,
+				BE62255F300C3D5B009C3305 /* DistrictWidget */,
+				BE62255A300C3D5B009C3305 /* Frameworks */,
 				BE622375300BFB4D009C3305 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,8 +117,18 @@
 			isa = PBXGroup;
 			children = (
 				BE622374300BFB4D009C3305 /* District.app */,
+				BE622559300C3D5B009C3305 /* DistrictWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		BE62255A300C3D5B009C3305 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BE62255B300C3D5B009C3305 /* WidgetKit.framework */,
+				BE62255D300C3D5B009C3305 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -79,8 +141,12 @@
 				BE622370300BFB4D009C3305 /* Sources */,
 				BE622371300BFB4D009C3305 /* Frameworks */,
 				BE622372300BFB4D009C3305 /* Resources */,
+				BE62256E300C3D5F009C3305 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
+			);
+			dependencies = (
+
 			);
 			fileSystemSynchronizedGroups = (
 				BE622376300BFB4D009C3305 /* District */,
@@ -97,6 +163,24 @@
 			productReference = BE622374300BFB4D009C3305 /* District.app */;
 			productType = "com.apple.product-type.application";
 		};
+		BE622558300C3D5B009C3305 /* DistrictWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE62256A300C3D5F009C3305 /* Build configuration list for PBXNativeTarget "DistrictWidgetExtension" */;
+			buildPhases = (
+				BE622555300C3D5B009C3305 /* Sources */,
+				BE622556300C3D5B009C3305 /* Frameworks */,
+				BE622557300C3D5B009C3305 /* Resources */,
+			);
+			buildRules = (
+			);
+			fileSystemSynchronizedGroups = (
+				BE62255F300C3D5B009C3305 /* DistrictWidget */,
+			);
+			name = DistrictWidgetExtension;
+			productName = DistrictWidgetExtension;
+			productReference = BE622559300C3D5B009C3305 /* DistrictWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -108,6 +192,9 @@
 				LastUpgradeCheck = 2700;
 				TargetAttributes = {
 					BE622373300BFB4D009C3305 = {
+						CreatedOnToolsVersion = 27.0;
+					};
+					BE622558300C3D5B009C3305 = {
 						CreatedOnToolsVersion = 27.0;
 					};
 				};
@@ -131,12 +218,18 @@
 			projectRoot = "";
 			targets = (
 				BE622373300BFB4D009C3305 /* District */,
+				BE622558300C3D5B009C3305 /* DistrictWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		BE622372300BFB4D009C3305 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		BE622557300C3D5B009C3305 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
 			);
@@ -149,7 +242,20 @@
 			files = (
 			);
 		};
+		BE622555300C3D5B009C3305 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BE622568300C3D5F009C3305 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE622558300C3D5B009C3305 /* DistrictWidgetExtension */;
+			targetProxy = BE622567300C3D5F009C3305 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		BE62237D300BFB4F009C3305 /* Debug configuration for PBXProject "District" */ = {
@@ -360,6 +466,96 @@
 			};
 			name = Release;
 		};
+		BE62256B300C3D5F009C3305 /* Debug configuration for PBXNativeTarget "DistrictWidgetExtension" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DMKB94K3XZ;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DistrictWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DistrictWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jyotiraditya.district.app.DistrictWidget2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				XROS_DEPLOYMENT_TARGET = 27.0;
+			};
+			name = Debug;
+		};
+		BE62256C300C3D5F009C3305 /* Release configuration for PBXNativeTarget "DistrictWidgetExtension" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DMKB94K3XZ;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DistrictWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DistrictWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jyotiraditya.district.app.DistrictWidget2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				XROS_DEPLOYMENT_TARGET = 27.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -376,6 +572,14 @@
 			buildConfigurations = (
 				BE622380300BFB4F009C3305 /* Debug configuration for PBXNativeTarget "District" */,
 				BE622381300BFB4F009C3305 /* Release configuration for PBXNativeTarget "District" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		BE62256A300C3D5F009C3305 /* Build configuration list for PBXNativeTarget "DistrictWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE62256B300C3D5F009C3305 /* Debug configuration for PBXNativeTarget "DistrictWidgetExtension" */,
+				BE62256C300C3D5F009C3305 /* Release configuration for PBXNativeTarget "DistrictWidgetExtension" */,
 			);
 			defaultConfigurationName = Release;
 		};
