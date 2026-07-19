@@ -273,8 +273,7 @@ final class BookingService {
     // MARK: - Cancel
 
     func cancelBooking(id: String) async throws {
-        try await db.collection(Constants.bookingsCollectionPath).document(id)
-            .updateData(["status": BookingStatus.cancelled.rawValue])
+        try await db.collection(Constants.bookingsCollectionPath).document(id).delete()
     }
 
     // MARK: - Helpers

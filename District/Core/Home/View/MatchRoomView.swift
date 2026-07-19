@@ -14,6 +14,7 @@ struct MatchRoomView: View {
 
     @State private var viewModel: MatchRoomViewModel
     @State private var showInviteSheet = false
+    @State private var showCancelAlert = false
     @State private var activeTab = "Room"
     @State private var chatText = ""
 
@@ -60,9 +61,6 @@ struct MatchRoomView: View {
                     Image(systemName: "chevron.left")
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundColor(.white)
-                        .frame(width: 40, height: 40)
-                        .background(Color.white.opacity(0.1))
-                        .clipShape(Circle())
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -70,9 +68,6 @@ struct MatchRoomView: View {
                     Image(systemName: "square.and.arrow.up")
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundColor(.white)
-                        .frame(width: 40, height: 40)
-                        .background(Color.white.opacity(0.1))
-                        .clipShape(Circle())
                 }
             }
         }
@@ -81,6 +76,22 @@ struct MatchRoomView: View {
         }
         .onDisappear {
             viewModel.stopListening()
+        }
+        .onChange(of: viewModel.booking) { _, newBooking in
+            if newBooking == nil && !viewModel.isLoading {
+                presentationMode.wrappedValue.dismiss()
+            }
+        }
+        .alert("Cancel Lobby?", isPresented: $showCancelAlert) {
+            Button("No, keep it", role: .cancel) { }
+            Button("Yes, cancel", role: .destructive) {
+                Task {
+                    await viewModel.cancel()
+                    presentationMode.wrappedValue.dismiss()
+                }
+            }
+        } message: {
+            Text("Are you sure you want to cancel this lobby? Your money will not be refunded.")
         }
         .sheet(isPresented: $showInviteSheet) {
             if let code = viewModel.booking?.inviteCode {
@@ -242,6 +253,23 @@ struct MatchRoomView: View {
                     .background(Color.white.opacity(0.05))
                     .cornerRadius(16)
                 }
+            }
+            
+            // Cancel Button
+            if let user = authViewModel.currentUser, 
+               booking.hostId == user.uid, 
+               viewModel.participants.count <= 1 {
+                Button(action: { showCancelAlert = true }) {
+                    Text("Cancel Lobby")
+                        .font(.subheadline)
+                        .fontWeight(.bold)
+                        .foregroundColor(.red)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.red.opacity(0.1))
+                        .cornerRadius(16)
+                }
+                .padding(.top, 8)
             }
             
             Color.clear.frame(height: 40)
