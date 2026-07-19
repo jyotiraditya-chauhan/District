@@ -103,8 +103,8 @@ struct RootNavigationView: View {
             BookSlotView(venue: venue)
         case .matchSetup(let venue, let date, let time, let duration, let turfName, let totalCost, let slotStartDate):
             MatchSetupView(venue: venue, date: date, time: time, duration: duration, turfName: turfName, totalCost: totalCost, slotStartDate: slotStartDate)
-        case .reviewBooking(let venue, let date, let time, let duration, let matchType, let totalPlayers, let totalCost, let skillLevel, let paymentWindow, let sport, let slotStartDate):
-            ReviewBookingView(venue: venue, date: date, time: time, duration: duration, matchType: matchType, totalPlayers: totalPlayers, totalCost: totalCost, skillLevel: skillLevel, paymentWindow: paymentWindow, sport: sport, slotStartDate: slotStartDate)
+        case .reviewBooking(let venue, let date, let time, let duration, let matchType, let totalPlayers, let totalCost, let skillLevel, let sport, let slotStartDate):
+            ReviewBookingView(venue: venue, date: date, time: time, duration: duration, matchType: matchType, totalPlayers: totalPlayers, totalCost: totalCost, skillLevel: skillLevel, sport: sport, slotStartDate: slotStartDate)
         case .matchRoom(let bookingId):
             MatchRoomView(bookingId: bookingId)
         case .joinConfirm(let bookingId):

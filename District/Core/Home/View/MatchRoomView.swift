@@ -254,47 +254,10 @@ struct MatchRoomView: View {
 
     @ViewBuilder
     private func paymentSection(booking: BookingEntity) -> some View {
-        if let uid = authViewModel.currentUser?.uid, booking.participantIds.contains(uid) {
-            if booking.status == .cancelled {
-                statusBanner(icon: "xmark.circle.fill", text: "This match was cancelled.", color: .red)
-            } else if !viewModel.participants.isEmpty && viewModel.participants.allSatisfy(\.hasPaid) {
-                statusBanner(icon: "checkmark.seal.fill", text: "Confirmed — everyone has paid!", color: .green)
-            } else if !viewModel.paymentEnabled {
-                statusBanner(
-                    icon: "clock.badge.checkmark",
-                    text: "Joining is free for now. Payment opens in \(formattedTimeRemaining(viewModel.timeRemaining)), once the window closes.",
-                    color: Color(red: 120/255, green: 180/255, blue: 255/255)
-                )
-            } else if viewModel.hasUserPaid(uid: uid) {
-                statusBanner(icon: "checkmark.circle.fill", text: "You've paid your share.", color: .green)
-            } else {
-                VStack(spacing: 12) {
-                    Text("Payment window closed — your spot is confirmed, please pay your share.")
-                        .font(.subheadline)
-                        .foregroundColor(.white)
-
-                    Button(action: {
-                        Task {
-                            if viewModel.isHost(uid: uid) {
-                                await viewModel.payHostCoverage(uid: uid)
-                            } else {
-                                await viewModel.pay(uid: uid)
-                            }
-                        }
-                    }) {
-                        Text("Pay ₹\(Int(booking.perPlayerCost))")
-                            .font(.headline)
-                            .foregroundColor(.black)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                            .background(Color.white)
-                            .cornerRadius(12)
-                    }
-                }
-                .padding()
-                .background(Color.white.opacity(0.1))
-                .cornerRadius(16)
-            }
+        if booking.status == .cancelled {
+            statusBanner(icon: "xmark.circle.fill", text: "This match was cancelled.", color: .red)
+        } else if !viewModel.participants.isEmpty && viewModel.participants.count == booking.totalSpots {
+            statusBanner(icon: "checkmark.seal.fill", text: "Confirmed — everyone has paid and the match is full!", color: .green)
         }
     }
 
@@ -307,14 +270,6 @@ struct MatchRoomView: View {
         .background(color.opacity(0.1))
         .cornerRadius(16)
         .overlay(RoundedRectangle(cornerRadius: 16).stroke(color.opacity(0.3), lineWidth: 1))
-    }
-
-    private func formattedTimeRemaining(_ interval: TimeInterval) -> String {
-        let totalMinutes = max(0, Int(interval / 60))
-        let h = totalMinutes / 60
-        let m = totalMinutes % 60
-        if h > 0 { return "\(h)h \(m)m" }
-        return "\(m)m"
     }
 
     // MARK: - Chat Tab

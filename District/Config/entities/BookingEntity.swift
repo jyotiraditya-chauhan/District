@@ -50,10 +50,7 @@ struct BookingEntity: Identifiable, Codable, Equatable {
     var participantIds: [String]
 
     // Payment window
-    var paymentWindowHours: Int
-    var paymentDeadline: Date
-    /// Logged when the payment window actually expires (status flips to awaitingPayment). nil until then.
-    var paymentEnabledAt: Date? = nil
+    // (Removed payment window logic: host pays upfront, participants pay to join)
 
     // Status
     var status: BookingStatus
@@ -62,7 +59,6 @@ struct BookingEntity: Identifiable, Codable, Equatable {
 
 enum BookingStatus: String, Codable {
     case open
-    case awaitingPayment
     case confirmed
     case cancelled
 }

@@ -28,12 +28,10 @@ final class BookingService {
         rules: String?,
         totalSpots: Int,
         totalCost: Double,
-        perPlayerCost: Double,
-        paymentWindowHours: Int
+        perPlayerCost: Double
     ) async throws -> String {
         let code = try await generateUniqueInviteCode()
         let now = Date()
-        let deadline = now.addingTimeInterval(Double(paymentWindowHours) * 3600)
 
         let ref = db.collection(Constants.bookingsCollectionPath).document()
 
@@ -63,8 +61,6 @@ final class BookingService {
             platformFee: Constants.platformFee,
             inviteCode: code,
             participantIds: [host.uid],
-            paymentWindowHours: paymentWindowHours,
-            paymentDeadline: deadline,
             status: .open,
             createdAt: now
         )
@@ -78,8 +74,8 @@ final class BookingService {
             profileImageURL: host.profileImageURL,
             isHost: true,
             joinedAt: now,
-            hasPaid: false,
-            amountPaid: 0,
+            hasPaid: true,
+            amountPaid: totalCost,
             team: nil
         )
         try ref.collection(Constants.participantsSubcollection)
@@ -115,12 +111,8 @@ final class BookingService {
             guard booking.status == .open else {
                 errorPointer?.pointee = BookingError.windowClosed as NSError; return nil
             }
-            guard Date() < booking.paymentDeadline else {
-                errorPointer?.pointee = BookingError.windowClosed as NSError; return nil
-            }
             guard booking.hostId != user.uid else {
-                errorPointer?.pointee = NSError(domain: "Booking", code: 403, userInfo: [NSLocalizedDescriptionKey: "Host cannot join their own lobby."])
-                return nil
+                errorPointer?.pointee = BookingError.cannotJoinOwnLobby as NSError; return nil
             }
             guard booking.participantIds.count < booking.totalSpots else {
                 errorPointer?.pointee = BookingError.lobbyFull as NSError; return nil
@@ -131,9 +123,14 @@ final class BookingService {
 
             // Atomic: bump participantIds AND write the participant doc together,
             // so a mid-write interruption can never leave a counted-but-docless participant.
-            tx.updateData([
+            var updates: [AnyHashable: Any] = [
                 "participantIds": FieldValue.arrayUnion([user.uid])
-            ], forDocument: ref)
+            ]
+            if booking.participantIds.count + 1 == booking.totalSpots {
+                updates["status"] = BookingStatus.confirmed.rawValue
+            }
+
+            tx.updateData(updates, forDocument: ref)
 
             let participant = BookingParticipant(
                 uid: user.uid,
@@ -141,8 +138,8 @@ final class BookingService {
                 profileImageURL: user.profileImageURL,
                 isHost: false,
                 joinedAt: Date(),
-                hasPaid: false,
-                amountPaid: 0,
+                hasPaid: true,
+                amountPaid: booking.perPlayerCost,
                 team: nil
             )
             do {
@@ -166,7 +163,7 @@ final class BookingService {
         try? ref.collection(Constants.messagesSubcollection).addDocument(from: joinedMsg)
     }
 
-    func joinByCode(_ code: String, user: UserEntity) async throws -> String {
+    func fetchBookingIdByCode(_ code: String) async throws -> String {
         let snap = try await db.collection(Constants.bookingsCollectionPath)
             .whereField("inviteCode", isEqualTo: code.uppercased())
             .limit(to: 1)
@@ -175,7 +172,6 @@ final class BookingService {
         guard let doc = snap.documents.first else {
             throw BookingError.notFound
         }
-        try await joinBooking(id: doc.documentID, user: user)
         return doc.documentID
     }
 
@@ -222,9 +218,9 @@ final class BookingService {
     func observeMyBookings(uid: String, onChange: @escaping ([BookingEntity]) -> Void) -> ListenerRegistration {
         db.collection(Constants.bookingsCollectionPath)
             .whereField("participantIds", arrayContains: uid)
-            .order(by: "createdAt", descending: true)
             .addSnapshotListener { snap, _ in
-                let list = snap?.documents.compactMap { try? $0.data(as: BookingEntity.self) } ?? []
+                var list = snap?.documents.compactMap { try? $0.data(as: BookingEntity.self) } ?? []
+                list.sort { $0.createdAt > $1.createdAt }
                 onChange(list)
             }
     }
@@ -281,29 +277,6 @@ final class BookingService {
             .updateData(["status": BookingStatus.cancelled.rawValue])
     }
 
-    // MARK: - Payment window expiry
-
-    /// Flips `open` → `awaitingPayment` and logs `paymentEnabledAt`, once, when the
-    /// payment window has actually expired. Guarded by a transaction so concurrent
-    /// observers (multiple devices in the room) can't double-flip or race a join.
-    func expirePaymentWindowIfNeeded(bookingId: String) async {
-        let ref = db.collection(Constants.bookingsCollectionPath).document(bookingId)
-        _ = try? await db.runTransaction { tx, errorPointer in
-            let snap: DocumentSnapshot
-            do { snap = try tx.getDocument(ref) }
-            catch { errorPointer?.pointee = error as NSError; return nil }
-
-            guard let booking = try? snap.data(as: BookingEntity.self) else { return nil }
-            guard booking.status == .open, Date() >= booking.paymentDeadline else { return nil }
-
-            tx.updateData([
-                "status": BookingStatus.awaitingPayment.rawValue,
-                "paymentEnabledAt": Timestamp(date: Date())
-            ], forDocument: ref)
-            return nil
-        }
-    }
-
     // MARK: - Helpers
 
     private func generateUniqueInviteCode() async throws -> String {
@@ -326,6 +299,7 @@ enum BookingError: LocalizedError {
     case notFound
     case windowClosed
     case notAuthenticated
+    case cannotJoinOwnLobby
     case unknown(String)
 
     var errorDescription: String? {
@@ -335,6 +309,7 @@ enum BookingError: LocalizedError {
         case .notFound: "Match not found."
         case .windowClosed: "The payment window has closed."
         case .notAuthenticated: "Please sign in first."
+        case .cannotJoinOwnLobby: "You cannot join your own lobby."
         case .unknown(let msg): msg
         }
     }

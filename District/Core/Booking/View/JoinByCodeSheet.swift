@@ -59,11 +59,10 @@ struct JoinByCodeSheet: View {
 
                 Button {
                     Task {
-                        guard let user = authViewModel.currentUser else { return }
                         do {
-                            let bookingId = try await viewModel.joinByCode(code, user: user)
+                            let bookingId = try await viewModel.fetchBookingIdByCode(code)
                             dismiss()
-                            router.push(.matchRoom(bookingId: bookingId))
+                            router.push(.joinConfirm(bookingId: bookingId))
                         } catch {}
                     }
                 } label: {

@@ -21,7 +21,7 @@ struct VenueDetailView: View {
     private var joinablePublicLobbies: [BookingEntity] {
         let uid = authViewModel.currentUser?.uid
         return publicLobbies.filter { lobby in
-            guard lobby.paymentDeadline > Date() else { return false }
+            guard lobby.status == .open else { return false }
             guard lobby.hostId != uid else { return false }
             if let uid, lobby.participantIds.contains(uid) { return false }
             return true

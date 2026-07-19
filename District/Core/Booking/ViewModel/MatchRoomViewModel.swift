@@ -21,18 +21,7 @@ final class MatchRoomViewModel {
     private var bookingListener: ListenerRegistration?
     private var participantsListener: ListenerRegistration?
     private var messagesListener: ListenerRegistration?
-    private var expiryCheckTask: Task<Void, Never>?
 
-    // Derived
-    var paymentEnabled: Bool {
-        guard let booking else { return false }
-        return Date() >= booking.paymentDeadline
-    }
-
-    var timeRemaining: TimeInterval {
-        guard let booking else { return 0 }
-        return max(0, booking.paymentDeadline.timeIntervalSinceNow)
-    }
 
     var confirmedCount: Int {
         participants.filter(\.hasPaid).count
@@ -81,17 +70,7 @@ final class MatchRoomViewModel {
             }
         }
 
-        // Periodically check whether the payment window has expired, so the room
-        // flips open → awaitingPayment (and the Pay button appears) without a manual refresh.
-        expiryCheckTask?.cancel()
-        expiryCheckTask = Task { [weak self] in
-            while let self, !Task.isCancelled {
-                if let booking = self.booking, booking.status == .open, Date() >= booking.paymentDeadline {
-                    await self.service.expirePaymentWindowIfNeeded(bookingId: self.bookingId)
-                }
-                try? await Task.sleep(for: .seconds(5))
-            }
-        }
+
     }
 
     func stopListening() {
@@ -101,8 +80,6 @@ final class MatchRoomViewModel {
         bookingListener = nil
         participantsListener = nil
         messagesListener = nil
-        expiryCheckTask?.cancel()
-        expiryCheckTask = nil
     }
 
     func sendMessage(text: String, sender: UserEntity) async {
@@ -114,25 +91,7 @@ final class MatchRoomViewModel {
         }
     }
 
-    func pay(uid: String) async {
-        guard let perPlayerCost = booking?.perPlayerCost else { return }
-        do {
-            try await service.markPaid(bookingId: bookingId, uid: uid, amount: perPlayerCost)
-        } catch {
-            errorMessage = error.localizedDescription
-        }
-    }
 
-    func payHostCoverage(uid: String) async {
-        guard let booking else { return }
-        let unfilledSpots = booking.totalSpots - participants.count
-        let hostAmount = booking.perPlayerCost + (Double(unfilledSpots) * booking.perPlayerCost)
-        do {
-            try await service.markPaid(bookingId: bookingId, uid: uid, amount: hostAmount)
-        } catch {
-            errorMessage = error.localizedDescription
-        }
-    }
 
     func cancel() async {
         guard let id = booking?.id else { return }

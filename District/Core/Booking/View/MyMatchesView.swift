@@ -114,7 +114,7 @@ struct MyMatchesView: View {
         let (text, color): (String, Color) = {
             switch status {
             case .open: return ("Open", Color(red: 100/255, green: 220/255, blue: 120/255))
-            case .awaitingPayment: return ("Payment", Color(red: 255/255, green: 170/255, blue: 60/255))
+
             case .confirmed: return ("Confirmed", Color(red: 100/255, green: 180/255, blue: 255/255))
             case .cancelled: return ("Cancelled", .red)
             }

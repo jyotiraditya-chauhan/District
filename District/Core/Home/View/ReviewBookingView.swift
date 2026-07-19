@@ -16,7 +16,6 @@ struct ReviewBookingView: View {
     let totalPlayers: Int
     let totalCost: Double
     let skillLevel: String
-    let paymentWindow: Int
     let sport: String
     let slotStartDate: Date
 
@@ -112,13 +111,6 @@ struct ReviewBookingView: View {
                             .padding(.top, 12)
                     }
 
-                    // ── Disclaimer ────────────────────────────────────────
-                    Text("Payment Window: Players have \(paymentWindow) hr\(paymentWindow > 1 ? "s" : "") to pay after invite. Unpaid slots auto-open to public to protect your investment.")
-                        .font(.caption).foregroundColor(DS.textSecondary)
-                        .lineSpacing(3)
-                        .padding(.horizontal, DS.s3)
-                        .padding(.top, 12)
-
                     Color.clear.frame(height: 120)
                 }
             }
@@ -142,7 +134,7 @@ struct ReviewBookingView: View {
                             ProgressView().tint(.black)
                         } else {
                             Image(systemName: "play.fill").font(.caption)
-                            Text("Create Match")
+                            Text("Pay & Create Match")
                         }
                     }
                     .font(.subheadline).fontWeight(.bold).foregroundColor(.black)
@@ -227,8 +219,7 @@ struct ReviewBookingView: View {
                 rules: nil,
                 totalSpots: totalPlayers,
                 totalCost: totalCost,
-                perPlayerCost: perPlayer,
-                paymentWindowHours: paymentWindow
+                perPlayerCost: perPlayer
             )
             isCreating = false
             router.push(.matchRoom(bookingId: bookingId))

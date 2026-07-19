@@ -23,29 +23,6 @@ struct MatchSetupView: View {
     @State private var matchRules: String = ""
     @State private var allowSpectators: Bool = false
     @State private var enableLocationShare: Bool = true
-    @State private var paymentWindowHours: Int = 0   // set on appear to the largest fitting window
-
-    /// Whole payment-window options offered by the product.
-    private let windowOptions = [1, 2, 3]
-
-    /// Hours remaining until the slot starts (payment must finish before play).
-    private var hoursUntilSlot: Double {
-        slotStartDate.timeIntervalSinceNow / 3600
-    }
-
-    /// A window fits only if its deadline (now + window) lands before the slot start.
-    private func windowFits(_ hours: Int) -> Bool {
-        Double(hours) <= hoursUntilSlot
-    }
-
-    /// Largest fitting window, or nil if the slot is too soon for even 1 hr.
-    private var largestFittingWindow: Int? {
-        windowOptions.filter(windowFits).max()
-    }
-
-    private var canProceed: Bool {
-        largestFittingWindow != nil && paymentWindowHours > 0
-    }
 
     enum MatchMode: String, CaseIterable {
         case privateMatch = "Private"
@@ -136,45 +113,6 @@ struct MatchSetupView: View {
                     .cornerRadius(16)
                     .padding(.horizontal, DS.s3)
 
-                    // ── Payment Window (only for split/public) ───────────
-                    sectionHeader("PAYMENT WINDOW")
-
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("How long should players have to join and pay their share? Payment unlocks when this window closes — it must end before the slot starts.")
-                            .font(.caption).foregroundColor(DS.textSecondary)
-
-                        if largestFittingWindow == nil {
-                            HStack(spacing: 10) {
-                                Image(systemName: "exclamationmark.triangle.fill")
-                                    .foregroundColor(Color(red: 255/255, green: 170/255, blue: 60/255))
-                                Text("This slot is too soon to host — pick a later time.")
-                                    .font(.caption).fontWeight(.semibold).foregroundColor(.white)
-                            }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(12)
-                            .background(Color(red: 255/255, green: 170/255, blue: 60/255).opacity(0.1))
-                            .cornerRadius(12)
-                        } else {
-                            HStack(spacing: 12) {
-                                ForEach(windowOptions, id: \.self) { hours in
-                                    let fits = windowFits(hours)
-                                    Button { if fits { paymentWindowHours = hours } } label: {
-                                        Text("\(hours) hr")
-                                            .font(.caption).fontWeight(.bold)
-                                            .foregroundColor(paymentWindowHours == hours ? .black : (fits ? .white : DS.textSecondary.opacity(0.5)))
-                                            .frame(maxWidth: .infinity).padding(.vertical, 10)
-                                            .background(paymentWindowHours == hours ? Color.white : Color.white.opacity(fits ? 0.08 : 0.02))
-                                            .cornerRadius(12)
-                                    }
-                                    .disabled(!fits)
-                                }
-                            }
-                        }
-                    }
-                    .padding(16)
-                    .background(DS.surface)
-                    .cornerRadius(16)
-                    .padding(.horizontal, DS.s3)
 
                     // ── Match Rules ─────────────────────────────────────
                     if matchMode == .publicMatch {
@@ -260,7 +198,6 @@ struct MatchSetupView: View {
                 Spacer()
 
                 Button(action: {
-                    guard canProceed else { return }
                     router.push(.reviewBooking(
                         venue: venue,
                         date: date,
@@ -270,7 +207,6 @@ struct MatchSetupView: View {
                         totalPlayers: totalPlayers,
                         totalCost: totalCost,
                         skillLevel: skillLevel.rawValue,
-                        paymentWindow: paymentWindowHours,
                         sport: DataManager.shared.games.first(where: { $0.id == venue.gameId })?.sport ?? "Box Cricket",
                         slotStartDate: slotStartDate
                     ))
@@ -278,9 +214,8 @@ struct MatchSetupView: View {
                     Text("Review Booking")
                         .font(.subheadline).fontWeight(.bold).foregroundColor(.black)
                         .padding(.horizontal, 20).padding(.vertical, 14)
-                        .background(canProceed ? Color.white : Color.white.opacity(0.3)).cornerRadius(24)
+                        .background(Color.white).cornerRadius(24)
                 }
-                .disabled(!canProceed)
             }
             .padding(.horizontal, 20).padding(.vertical, 14)
             .background(.ultraThinMaterial)
@@ -290,11 +225,7 @@ struct MatchSetupView: View {
             .padding(.horizontal, DS.s3)
             .padding(.bottom, 16)
         }
-        .onAppear {
-            if paymentWindowHours == 0, let largest = largestFittingWindow {
-                paymentWindowHours = largest
-            }
-        }
+
         .navigationTitle("Set Up Match")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)

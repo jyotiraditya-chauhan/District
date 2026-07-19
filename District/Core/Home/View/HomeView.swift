@@ -67,14 +67,7 @@ struct HomeView: View {
 
                 // Right Side: Action Icons
                 HStack(spacing: DS.s2) {
-                    Button(action: { showJoinCodeSheet = true }) {
-                        Image(systemName: "number.square.fill")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundStyle(DS.textPrimary)
-                            .frame(width: 44, height: 44)
-                            .background(Color(white: 0.15))
-                            .clipShape(Circle())
-                    }
+
 
                     Button(action: { router.push(.myMatches) }) {
                         Image(systemName: "bookmark")
@@ -103,10 +96,21 @@ struct HomeView: View {
             }
             .padding(.horizontal, DS.s3)
 
-            // Search Bar
-            Button(action: { router.push(.searchPlay) }) {
-                SearchPill(placeholder: "Search for 'Pool'")
-                    .padding(.horizontal, DS.s3)
+            // Invite Code Bar
+            Button(action: { showJoinCodeSheet = true }) {
+                HStack(spacing: DS.s1 + 2) {
+                    Image(systemName: "number.square.fill")
+                        .font(.system(size: 18, weight: .medium))
+                        .foregroundStyle(DS.textSecondary)
+                    Text("Enter your invite code")
+                        .font(.system(size: 17))
+                        .foregroundStyle(DS.textSecondary)
+                    Spacer()
+                }
+                .padding(.horizontal, DS.s2 + 2)
+                .frame(height: 52)
+                .glassy(in: .capsule)
+                .padding(.horizontal, DS.s3)
             }
             .buttonStyle(PlainButtonStyle())
         }

@@ -1,4 +1,0 @@
-module AppAuthCore {
-umbrella "/Users/adityachauhan/Library/Developer/Xcode/DerivedData/District-eghkvbksxbrfjbfyiqejvsxuuoxs/SourcePackages/checkouts/AppAuth-iOS/Sources/AppAuthCore"
-export *
-}

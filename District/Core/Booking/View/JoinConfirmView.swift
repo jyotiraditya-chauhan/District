@@ -75,13 +75,13 @@ struct JoinConfirmView: View {
 
                         // Payment note
                         HStack(spacing: 14) {
-                            Image(systemName: "clock.badge.checkmark")
+                            Image(systemName: "indianrupeesign.circle.fill")
                                 .font(.title2)
                                 .foregroundColor(Color(red: 100/255, green: 220/255, blue: 120/255))
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("Paymentz Deferred")
+                                Text("Pay to Join")
                                     .font(.subheadline).fontWeight(.bold).foregroundColor(.white)
-                                Text("Joining reserves your spot. You'll pay your share of \u{20B9}\(Int(booking.perPlayerCost)) when the payment window closes.")
+                                Text("Pay your share of \u{20B9}\(Int(booking.perPlayerCost)) now to confirm your spot in the match.")
                                     .font(.caption).foregroundColor(DS.textSecondary).lineSpacing(2)
                             }
                         }
@@ -117,7 +117,7 @@ struct JoinConfirmView: View {
                                 ProgressView().tint(.black)
                             } else {
                                 Image(systemName: "checkmark.circle.fill").font(.caption)
-                                Text("Confirm & Join")
+                                Text("Pay \u{20B9}\(Int(booking.perPlayerCost)) & Join")
                             }
                         }
                         .font(.subheadline).fontWeight(.bold).foregroundColor(.black)

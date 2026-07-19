@@ -1,0 +1,1 @@
+../District/Config/Shared/WidgetDeepLink.swift

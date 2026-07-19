@@ -1,4 +1,0 @@
-module third_party_IsAppEncrypted {
-umbrella "/Users/adityachauhan/Library/Developer/Xcode/DerivedData/District-eghkvbksxbrfjbfyiqejvsxuuoxs/SourcePackages/checkouts/GoogleUtilities/third_party/IsAppEncrypted/Public"
-export *
-}

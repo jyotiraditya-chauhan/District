@@ -30,12 +30,12 @@ final class JoinLobbyViewModel {
         lobbiesListener = nil
     }
 
-    func joinByCode(_ code: String, user: UserEntity) async throws -> String {
+    func fetchBookingIdByCode(_ code: String) async throws -> String {
         isJoining = true
         defer { isJoining = false }
         errorMessage = nil
         do {
-            let bookingId = try await service.joinByCode(code, user: user)
+            let bookingId = try await service.fetchBookingIdByCode(code)
             return bookingId
         } catch {
             errorMessage = error.localizedDescription

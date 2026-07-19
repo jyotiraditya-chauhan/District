@@ -3,22 +3,22 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 110;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		16B5C4CCA4CE5765415E22DC /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F92C35D56CFAF2FAB17E79C4 /* FirebaseAuth */; };
+		3EB3B5C6304137897212382E /* DistrictWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BE622559300C3D5B009C3305 /* DistrictWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AE6E7D8A93D538A608358CBE /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4EF41549CB7DD53F8C142BE2 /* GoogleSignInSwift */; };
 		BE62255C300C3D5B009C3305 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE62255B300C3D5B009C3305 /* WidgetKit.framework */; };
 		BE62255E300C3D5B009C3305 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE62255D300C3D5B009C3305 /* SwiftUI.framework */; };
-		BE622569300C3D5F009C3305 /* DistrictWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BE622559300C3D5B009C3305 /* DistrictWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D0BC79704C59A43F28870FA0 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = D58A94C2FBD8410E49359D95 /* FirebaseCore */; };
 		D4D41AB0D4591AD62D5F8547 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 91CC6C7207EA0C1490E55F70 /* FirebaseFirestore */; };
 		DA6E82293CB978390A06F0BE /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 737479CA262AD434F8789109 /* GoogleSignIn */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		BE622567300C3D5F009C3305 /* PBXContainerItemProxy */ = {
+		285BEBA8DD13EA9478B9433D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BE62236C300BFB4D009C3305 /* Project object */;
 			proxyType = 1;
@@ -30,12 +30,14 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		BE62256E300C3D5F009C3305 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolder = PlugIns;
+			dstSubfolderSpec = 13;
 			files = (
-
+				3EB3B5C6304137897212382E /* DistrictWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -85,6 +87,7 @@
 /* Begin PBXFrameworksBuildPhase section */
 		BE622371300BFB4D009C3305 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				16B5C4CCA4CE5765415E22DC /* FirebaseAuth in Frameworks */,
 				D0BC79704C59A43F28870FA0 /* FirebaseCore in Frameworks */,
@@ -92,13 +95,16 @@
 				DA6E82293CB978390A06F0BE /* GoogleSignIn in Frameworks */,
 				AE6E7D8A93D538A608358CBE /* GoogleSignInSwift in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		BE622556300C3D5B009C3305 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				BE62255E300C3D5B009C3305 /* SwiftUI.framework in Frameworks */,
 				BE62255C300C3D5B009C3305 /* WidgetKit.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -146,7 +152,7 @@
 			buildRules = (
 			);
 			dependencies = (
-
+				FCF6721569B16DC00B1C7330 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				BE622376300BFB4D009C3305 /* District */,
@@ -172,6 +178,8 @@
 				BE622557300C3D5B009C3305 /* Resources */,
 			);
 			buildRules = (
+			);
+			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
 				BE62255F300C3D5B009C3305 /* DistrictWidget */,
@@ -226,39 +234,48 @@
 /* Begin PBXResourcesBuildPhase section */
 		BE622372300BFB4D009C3305 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		BE622557300C3D5B009C3305 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BE622370300BFB4D009C3305 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		BE622555300C3D5B009C3305 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		BE622568300C3D5F009C3305 /* PBXTargetDependency */ = {
+		FCF6721569B16DC00B1C7330 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			name = DistrictWidgetExtension;
 			target = BE622558300C3D5B009C3305 /* DistrictWidgetExtension */;
-			targetProxy = BE622567300C3D5F009C3305 /* PBXContainerItemProxy */;
+			targetProxy = 285BEBA8DD13EA9478B9433D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		BE62237D300BFB4F009C3305 /* Debug configuration for PBXProject "District" */ = {
+		BE62237D300BFB4F009C3305 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -320,7 +337,7 @@
 			};
 			name = Debug;
 		};
-		BE62237E300BFB4F009C3305 /* Release configuration for PBXProject "District" */ = {
+		BE62237E300BFB4F009C3305 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -374,11 +391,13 @@
 			};
 			name = Release;
 		};
-		BE622380300BFB4F009C3305 /* Debug configuration for PBXNativeTarget "District" */ = {
+		BE622380300BFB4F009C3305 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = District/District.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DMKB94K3XZ;
@@ -405,6 +424,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jyotiraditya.district.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -420,11 +440,13 @@
 			};
 			name = Debug;
 		};
-		BE622381300BFB4F009C3305 /* Release configuration for PBXNativeTarget "District" */ = {
+		BE622381300BFB4F009C3305 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = District/District.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DMKB94K3XZ;
@@ -451,6 +473,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jyotiraditya.district.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -466,11 +489,12 @@
 			};
 			name = Release;
 		};
-		BE62256B300C3D5F009C3305 /* Debug configuration for PBXNativeTarget "DistrictWidgetExtension" */ = {
+		BE62256B300C3D5F009C3305 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = DistrictWidget/DistrictWidget.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -481,7 +505,7 @@
 				INFOPLIST_FILE = DistrictWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DistrictWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -494,7 +518,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 27.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jyotiraditya.district.app.DistrictWidget2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jyotiraditya.district.app.DistrictWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
@@ -511,11 +535,12 @@
 			};
 			name = Debug;
 		};
-		BE62256C300C3D5F009C3305 /* Release configuration for PBXNativeTarget "DistrictWidgetExtension" */ = {
+		BE62256C300C3D5F009C3305 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = DistrictWidget/DistrictWidget.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -526,7 +551,7 @@
 				INFOPLIST_FILE = DistrictWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DistrictWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -539,7 +564,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 27.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jyotiraditya.district.app.DistrictWidget2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jyotiraditya.district.app.DistrictWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
@@ -562,25 +587,28 @@
 		BE62236F300BFB4D009C3305 /* Build configuration list for PBXProject "District" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BE62237D300BFB4F009C3305 /* Debug configuration for PBXProject "District" */,
-				BE62237E300BFB4F009C3305 /* Release configuration for PBXProject "District" */,
+				BE62237D300BFB4F009C3305 /* Debug */,
+				BE62237E300BFB4F009C3305 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		BE62237F300BFB4F009C3305 /* Build configuration list for PBXNativeTarget "District" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BE622380300BFB4F009C3305 /* Debug configuration for PBXNativeTarget "District" */,
-				BE622381300BFB4F009C3305 /* Release configuration for PBXNativeTarget "District" */,
+				BE622380300BFB4F009C3305 /* Debug */,
+				BE622381300BFB4F009C3305 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		BE62256A300C3D5F009C3305 /* Build configuration list for PBXNativeTarget "DistrictWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BE62256B300C3D5F009C3305 /* Debug configuration for PBXNativeTarget "DistrictWidgetExtension" */,
-				BE62256C300C3D5F009C3305 /* Release configuration for PBXNativeTarget "DistrictWidgetExtension" */,
+				BE62256B300C3D5F009C3305 /* Debug */,
+				BE62256C300C3D5F009C3305 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
@@ -633,5 +661,4 @@
 /* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BE62236C300BFB4D009C3305 /* Project object */;
-	validationLevel = 1;
 }
